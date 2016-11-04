@@ -10,7 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require d3.min.js
 //= require jquery
 //= require jquery_ujs
+//= require_tree ../../../vendor/assets/javascripts/janux/js
 //= require turbolinks
+//= require saveSvgAsPng.min.js
+//= require techTree.min.js
 //= require_tree .
