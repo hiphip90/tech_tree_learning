@@ -7,4 +7,3 @@ $ ->
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
         techTree.createTree(data.nodes, settings, data.offsets)
-        console.log techTree.dimensions
