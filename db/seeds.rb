@@ -28,7 +28,7 @@ nodes_data = [
   { "depth" => 2,
     "name" => "wind-blue-1",
     "requirements" => [ "fire-arrows-sky-1",
-                       "needles-fire-1" ]
+                        "needles-fire-1" ]
   },
   { "depth" => 1,
     "name" => "needles-fire-1",

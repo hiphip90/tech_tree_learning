@@ -14,7 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/janux/js
+//= require_tree ../../../vendor/assets/javascripts/tech-tree
 //= require turbolinks
 //= require saveSvgAsPng.min.js
-//= require techTree.min.js
 //= require_tree .
