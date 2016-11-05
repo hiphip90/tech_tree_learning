@@ -1,53 +1,53 @@
 { "nodes" : [
     { "depth" : 0,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
     "name" : "fireball-acid-2",
     "requirements" : []
     },
     { "depth" : 1,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "fireball-eerie-3",
         "requirements" : []
     },
     { "depth" : 2,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "light-jade-3",
         "requirements" : ["fireball-eerie-3"]
     },
     { "depth" : 2,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "light-royal-3",
         "requirements" : [ "fireball-eerie-3" ]
         },
     { "depth" : 1,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "fire-arrows-sky-1",
         "requirements" : [ "fireball-acid-2" ]
     },
     { "depth" : 2,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "beam-blue-2",
         "requirements" : [ "fire-arrows-sky-1" ]
     },
     { "depth" : 2,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "wind-blue-1",
         "requirements" : [ "fire-arrows-sky-1",
             "needles-fire-1"
         ]
     },
     { "depth" : 1,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "needles-fire-1",
         "requirements" : [ "fireball-acid-2" ]
     },
     { "depth" : 2,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "beam-red-1",
         "requirements" : [ "needles-fire-1" ]
     },
     { "depth" : 2,
-        "image_url" : "/assets/images/missing.png",
+        "image_url" : "/assets/missing.png",
         "name" : "explosion-red-3",
         "requirements" : [ "needles-fire-1" ]
     }
