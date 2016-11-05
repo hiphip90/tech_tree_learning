@@ -10,6 +10,5 @@
 #
 
 class Tree < ApplicationRecord
-  has_many :tree_nodes
-  has_many :nodes, through: :tree_nodes
+  has_many :nodes
 end

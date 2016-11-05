@@ -10,33 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104135053) do
+ActiveRecord::Schema.define(version: 20161105152916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "node_relations", force: :cascade do |t|
-    t.integer  "slave_node_id"
-    t.integer  "master_node_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["master_node_id"], name: "index_node_relations_on_master_node_id", using: :btree
-    t.index ["slave_node_id"], name: "index_node_relations_on_slave_node_id", using: :btree
-  end
-
   create_table "nodes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tree_nodes", force: :cascade do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "requirements",      default: [],              array: true
+    t.integer  "depth"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
     t.integer  "tree_id"
-    t.integer  "node_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["node_id"], name: "index_tree_nodes_on_node_id", using: :btree
-    t.index ["tree_id"], name: "index_tree_nodes_on_tree_id", using: :btree
+    t.index ["tree_id"], name: "index_nodes_on_tree_id", using: :btree
   end
 
   create_table "trees", force: :cascade do |t|
@@ -46,6 +36,5 @@ ActiveRecord::Schema.define(version: 20161104135053) do
     t.datetime "updated_at",  null: false
   end
 
-  add_foreign_key "tree_nodes", "nodes"
-  add_foreign_key "tree_nodes", "trees"
+  add_foreign_key "nodes", "trees"
 end
