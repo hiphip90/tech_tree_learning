@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails'
 gem 'slim'
 gem "paperclip", "~> 5.0.0"
+gem 'rails_serve_static_assets'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
