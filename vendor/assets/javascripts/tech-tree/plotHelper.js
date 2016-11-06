@@ -22,7 +22,7 @@ var techTree = (function(api){
             api.dimensions.nodeInnerHeight/2;
     };
     api.orientNodes.vertical = function(d, depths){
-        d.x = d._depthElementCount * api.dimensions.svgWidth/(depths[d.depth]+1) -
+        d.x = d.columnNumber * api.dimensions.svgWidth/6 -
             api.dimensions.nodeInnerWidth/2;
         d.y = d.depth * api.dimensions.nodeOuterHeight;
     };

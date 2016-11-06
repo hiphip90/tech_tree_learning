@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105152916) do
+ActiveRecord::Schema.define(version: 20161106223457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20161105152916) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.integer  "tree_id"
+    t.integer  "column_number"
     t.index ["tree_id"], name: "index_nodes_on_tree_id", using: :btree
   end
 

@@ -13,6 +13,7 @@
 #  icon_file_size    :integer
 #  icon_updated_at   :datetime
 #  tree_id           :integer
+#  column_number     :integer
 #
 # Indexes
 #
@@ -26,9 +27,9 @@
 class Node < ApplicationRecord
   belongs_to :tree
 
-  validates :name, :depth, presence: true
+  validates :name, :depth, :column_number, presence: true
   validates :name, uniqueness: { scope: :tree }
-  validates :depth, numericality: { greater_than_or_equal_to: 0 }
+  validates :depth, :column_number, numericality: { greater_than_or_equal_to: 0 }
   has_attached_file :icon, styles: { normal: "64x64>" },
                            url: '/:class/:id/icon',
                            default_url: "/assets/images/missing_icon.png"
