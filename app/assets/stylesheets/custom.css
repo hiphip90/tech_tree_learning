@@ -8,7 +8,25 @@
   stroke-width: 6px;
 }
 
-.dark-background {
+.sidebar-right {
+  margin-top: -20px;
+  padding-right: 80px!important;
+  padding: 20px;
   background-color: #1C2B36;
   border: none;
+}
+
+.form-actions {
+  background-color: inherit;
+  border: none;
+  margin-top: -10px;
+  padding-left: 10px;
+}
+
+.control-label {
+  color: white;
+}
+
+.input-xlarge {
+  width: 100%;
 }

@@ -7,3 +7,5 @@ $ ->
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
         techTree.createTree(data.nodes, settings, data.offsets)
+
+  $(".chzn-select").chosen({width: '100%'})

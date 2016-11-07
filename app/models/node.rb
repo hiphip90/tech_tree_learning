@@ -35,12 +35,21 @@ class Node < ApplicationRecord
                            default_url: "/assets/images/missing_icon.png"
   validates_attachment_content_type :icon, content_type: /\Aimage\/.*\z/
   validate :requirement_present_in_tree
+  validate :no_overlapping
 
   private
 
   def requirement_present_in_tree
+    requirements.reject! { |requirement| requirement.empty? }
     node_names = tree.nodes.pluck('name') - [name]
     valid = requirements.all? { |requirement| node_names.include?(requirement) }
-    errors.add(:requirements, 'not present in the tree') unless valid
+    return true if valid
+    errors.add(:requirements, 'not present in the tree')
+  end
+
+  def no_overlapping
+    overlapping_node = tree.nodes.find_by(depth: depth, column_number: column_number)
+    return true unless overlapping_node.present?
+    errors.add(:base, 'overlaps with existing node')
   end
 end
