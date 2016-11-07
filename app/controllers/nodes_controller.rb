@@ -1,7 +1,6 @@
 class NodesController < ApplicationController
   def create
     @tree = Tree.find(params[:tree_id])
-    binding.pry
     @node = @tree.nodes.create(node_params)
     render "dashboard/index"
   end
