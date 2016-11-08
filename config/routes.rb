@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root 'dashboard#index'
+  root 'trees#index'
 
-  resources :trees, only: [:show] do
+  resources :trees, only: [:show, :edit] do
     resources :nodes, only: [:create]
   end
 end

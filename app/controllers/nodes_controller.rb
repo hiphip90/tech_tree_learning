@@ -2,7 +2,6 @@ class NodesController < ApplicationController
   def create
     @tree = Tree.find(params[:tree_id])
     @node = @tree.nodes.create(node_params)
-    binding.pry
     redirect_to root_path
   end
 

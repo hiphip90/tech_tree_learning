@@ -1,8 +1,19 @@
 class TreesController < ApplicationController
+  def index
+    @trees = Tree.all
+  end
+
   def show
-    @nodes = Tree.find(params[:id]).nodes
+    @tree = Tree.find(params[:id])
+    @nodes = @tree.nodes
     respond_to do |format|
       format.json { render :show, layout: false }
+      format.html
     end
+  end
+
+  def edit
+    @tree = Tree.find(params[:id])
+    @nodes = @tree.nodes
   end
 end

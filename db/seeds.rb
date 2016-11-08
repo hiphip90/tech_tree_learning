@@ -1,4 +1,4 @@
-tree = Tree.create(name: 'rpg')
+tree = Tree.create(name: 'rpg', icon: File.new(Rails.root.join('app', 'assets', 'images', "tree.png")))
 
 nodes_data = [
   { "depth" => 0,
