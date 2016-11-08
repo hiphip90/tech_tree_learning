@@ -1,5 +1,5 @@
 .row-fluid
-  .tree.span9 data={id: @tree.id}
+  .tree.span9 data={url: tree_url(@tree)}
     #svg
   .span3.sidebar-right
     = form_for [@tree, @node], class: 'form-horizontal' do |f|
@@ -25,4 +25,4 @@
           .controls
             = f.file_field :icon, class: 'input-xlarge'
         .form-actions
-          = f.submit class: 'btn btn-primary'
+          = f.button class: 'btn btn-primary', id: 'submitButton', type: 'button'

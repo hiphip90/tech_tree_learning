@@ -15,5 +15,6 @@ class TreesController < ApplicationController
   def edit
     @tree = Tree.find(params[:id])
     @nodes = @tree.nodes
+    @node = @tree.nodes.new
   end
 end
