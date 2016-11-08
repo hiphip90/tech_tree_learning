@@ -14,6 +14,7 @@
 #  icon_updated_at   :datetime
 #  tree_id           :integer
 #  column_number     :integer
+#  full_name         :string
 #
 # Indexes
 #
@@ -28,7 +29,7 @@ class Node < ApplicationRecord
   belongs_to :tree
 
   validates :name, :depth, :column_number, presence: true
-  validates :name, uniqueness: { scope: :tree }
+  validates :full_name, uniqueness: { scope: :tree }
   validates :depth, :column_number, numericality: { greater_than_or_equal_to: 0 }
   has_attached_file :icon, styles: { normal: "64x64>" },
                            url: '/:class/:id/icon',
@@ -37,7 +38,13 @@ class Node < ApplicationRecord
   validate :requirement_present_in_tree
   validate :no_overlapping
 
+  before_validation :populate_name
+
   private
+
+  def populate_name
+    self.name = full_name.downcase.gsub(' ', '')
+  end
 
   def requirement_present_in_tree
     requirements.reject! { |requirement| requirement.empty? }

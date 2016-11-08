@@ -5,9 +5,9 @@
     = form_for [@tree, @node], class: 'form-horizontal' do |f|
       .fieldset
         .control-group
-          = f.label :name, nil, class: 'control-label'
+          = f.label :full_name, nil, class: 'control-label'
           .controls
-            = f.text_field :name, class: 'input-xlarge'
+            = f.text_field :full_name, class: 'input-xlarge'
         .control-group
           = f.label :depth, nil, class: 'control-label'
           .controls
