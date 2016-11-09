@@ -15,4 +15,8 @@
 
 class Tree < ApplicationRecord
   has_many :nodes
+  has_attached_file :icon, styles: { normal: "64x64>" },
+                           url: '/:class/:id/icon',
+                           default_url: "/assets/missing.png"
+  validates_attachment_content_type :icon, content_type: /\Aimage\/.*\z/
 end

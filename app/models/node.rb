@@ -33,7 +33,7 @@ class Node < ApplicationRecord
   validates :depth, :column_number, numericality: { greater_than_or_equal_to: 0 }
   has_attached_file :icon, styles: { normal: "64x64>" },
                            url: '/:class/:id/icon',
-                           default_url: "/assets/images/missing.png"
+                           default_url: "/assets/missing.png"
   validates_attachment_content_type :icon, content_type: /\Aimage\/.*\z/
   validate :requirement_present_in_tree
   validate :no_overlapping

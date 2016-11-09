@@ -52,3 +52,7 @@ nodes_data.each do |attributes|
   icon = File.new(Rails.root.join('app', 'assets', 'images', "#{attributes['full_name'].downcase.gsub(' ', '')}.png"))
   node = Node.create(attributes.merge(tree: tree, icon: icon))
 end
+
+10.times do |i|
+  Tree.create(name: "Test tree ##{i}")
+end

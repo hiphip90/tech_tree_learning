@@ -30,3 +30,19 @@
 .input-xlarge {
   width: 100%;
 }
+
+.tree {
+  margin-top: 30px;
+}
+
+.tree-icon {
+  text-align: center;
+}
+
+.tree-header {
+  color: white;
+}
+
+.trees-row {
+  margin-top: 40px;
+}

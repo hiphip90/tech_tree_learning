@@ -1,0 +1,8 @@
+- @trees.find_each.each_slice(6) do |trees|
+  .row-fluid.trees-row
+    - trees.each do |tree|
+      .span2.tree-icon
+        = link_to tree_url(tree) do
+          image src=(tree.icon.url) width=64 height=64
+          h4.tree-header
+            = tree.name

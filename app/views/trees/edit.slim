@@ -1,6 +1,10 @@
 .row-fluid
-  .tree.span9 data={url: tree_url(@tree)}
-    #svg
+  .tree-container.span9
+    .row-fluid.text-center.tree-header
+      h1
+        = @tree.name
+    .tree data={url: tree_url(@tree)}
+      #svg
   .span3.sidebar-right
     = form_for [@tree, @node], class: 'form-horizontal' do |f|
       .fieldset
