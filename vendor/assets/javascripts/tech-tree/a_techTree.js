@@ -75,7 +75,7 @@ var techTree = (function(api){
             // initialize the nodes
             var nodes = svg.selectAll("g.node").data(api.nodesData);
             api.initializeNodes(nodes, nodesByName);
-
+            api.nodesByNameAccessor = nodesByName;
             // initialize the links
             var links = svg.selectAll("path.link")
                 .data(linksData, function (d) {

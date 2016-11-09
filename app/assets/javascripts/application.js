@@ -17,4 +17,5 @@
 //= require_tree ../../../vendor/assets/javascripts/tech-tree
 //= require turbolinks
 //= require saveSvgAsPng.min.js
+//= require custom.coffee
 //= require_tree .
