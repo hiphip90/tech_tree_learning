@@ -28,6 +28,7 @@ $ ->
           'settings': { 'imageFolderName': '/assets' },
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
+        console.log data
         techTree.createTree(data.nodes, settings, data.offsets)
         initializeClickHandlerForNodes()
         if window.location.pathname.match(/\/trees\/\d+\/edit/)

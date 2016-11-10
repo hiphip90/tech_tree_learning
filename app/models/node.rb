@@ -28,8 +28,8 @@
 class Node < ApplicationRecord
   belongs_to :tree
 
-  validates :name, :depth, :column_number, presence: true
-  validates :full_name, uniqueness: { scope: :tree }
+  validates :full_name, :depth, :column_number, presence: true
+  validates :name, uniqueness: { scope: :tree }
   validates :depth, :column_number, numericality: { greater_than_or_equal_to: 0 }
   has_attached_file :icon, styles: { normal: "64x64>" },
                            url: '/:class/:id/icon',
@@ -38,16 +38,7 @@ class Node < ApplicationRecord
   validate :requirement_present_in_tree
   validate :no_overlapping
 
-  before_save :populate_name
   before_destroy :destroy_requirements
-
-  protected
-
-  def update_requirements(old_req, new_req)
-    requirements.delete_if { |req| req == old_req }
-    requirements << new_req
-    save
-  end
 
   private
 
@@ -55,15 +46,6 @@ class Node < ApplicationRecord
     requirements.each do |node_name|
       tree.nodes.find_by(name: node_name).destroy
     end
-  end
-
-  def populate_name
-    old_name = name
-    new_name = full_name.downcase.gsub(' ', '')
-    return if old_name == new_name
-    self.name = new_name
-    dependent_nodes = tree.nodes.where("'#{old_name}' = ANY requirements")
-    dependent_nodes.each { |node| node.update_requirements(old_name, new_name) }
   end
 
   def requirement_present_in_tree
@@ -76,7 +58,7 @@ class Node < ApplicationRecord
 
   def no_overlapping
     overlapping_node = tree.nodes.find_by(depth: depth, column_number: column_number)
-    return true unless overlapping_node.present?
+    return true unless overlapping_node.present? && overlapping_node.id != id
     errors.add(:base, 'overlaps with existing node')
   end
 end

@@ -1,3 +1,6 @@
+require "#{Rails.root}/app/operations/nodes/create_node"
+require "#{Rails.root}/app/operations/nodes/update_node"
+
 class NodesController < ApplicationController
   def show
     @node = Node.find(params[:id])
@@ -8,13 +11,12 @@ class NodesController < ApplicationController
 
   def create
     @tree = Tree.find(params[:tree_id])
-    @node = @tree.nodes.create!(node_params)
+    @node = CreateNode.new(@tree, node_params).process
     head :created
   end
 
   def update
-    @node = Node.find(params[:id])
-    @node.update!(node_params)
+    @node = UpdateNode.new(params[:id], node_params).process
     respond_to do |format|
       format.json { render :show, layout: false }
     end
