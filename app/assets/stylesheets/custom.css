@@ -8,12 +8,12 @@
   stroke-width: 6px;
 }
 
-.sidebar-right {
-  margin-top: -20px;
-  padding-right: 80px!important;
-  padding: 20px;
-  background-color: #1C2B36;
-  border: none;
+.sidebar-content {
+  margin: 10px 20px 10px 10px;
+}
+
+.margined-link {
+  margin-left: 10px;
 }
 
 .form-actions {

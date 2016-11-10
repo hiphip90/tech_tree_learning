@@ -24,12 +24,7 @@ html
     .container-fluid-full
       .row-fluid
         #sidebar-left.span2
-          .nav-collapse.sidebar-nav
-            .nav.nav-tabs.nav-stacked.main-menu
-              li
-                = link_to root_path
-                  i.icon-bar-chart
-                  span.hidden-tablet  All Trees
+          .sidebar-content
+            == yield :sidebar
         #content
           == yield
-

@@ -1,32 +1,33 @@
 .row-fluid
-  .tree-container.span9
+  .tree-container
     .row-fluid.text-center.tree-header
       h1
         = @tree.name
     .tree data={url: tree_url(@tree)}
       #svg
-  .span3.sidebar-right
-    = form_for [@tree, @node], class: 'form-horizontal' do |f|
-      .fieldset
-        .control-group
-          = f.label :full_name, nil, class: 'control-label'
-          .controls
-            = f.text_field :full_name, class: 'input-xlarge'
-        .control-group
-          = f.label :depth, nil, class: 'control-label'
-          .controls
-            = f.text_field :depth, class: 'input-xlarge'
-        .control-group
-          = f.label :column_number, nil, class: 'control-label'
-          .controls
-            = f.text_field :column_number, class: 'input-xlarge'
-        .control-group
-          = f.label :requirements, nil, class: 'control-label'
-          .controls
-            = f.select :requirements, requirements_for_select(@tree, @node), {}, class: 'chzn-select', multiple: true, allow_blank: false
-        .control-group
-          = f.label :icon, nil, class: 'control-label'
-          .controls
-            = f.file_field :icon, class: 'input-xlarge'
-        .form-actions
-          = f.button class: 'btn btn-primary', id: 'submitButton', type: 'button'
+- content_for :sidebar do
+  = form_for [@tree, @node], class: 'form-horizontal' do |f|
+    .fieldset
+      .control-group
+        = f.label :full_name, nil, class: 'control-label'
+        .controls
+          = f.text_field :full_name, class: 'form-control'
+      .control-group
+        = f.label :depth, nil, class: 'control-label'
+        .controls
+          = f.text_field :depth, class: 'form-control'
+      .control-group
+        = f.label :column_number, nil, class: 'control-label'
+        .controls
+          = f.text_field :column_number, class: 'form-control'
+      .control-group
+        = f.label :requirements, nil, class: 'control-label'
+        .controls
+          = f.select :requirements, requirements_for_select(@tree, @node), {}, class: 'chzn-select', multiple: true, allow_blank: false
+      .control-group
+        = f.label :icon, nil, class: 'control-label'
+        .controls
+          = f.file_field :icon, class: 'form-control'
+      .form-actions
+        = f.button class: 'btn btn-primary', id: 'submitButton', type: 'button'
+        = link_to 'Back to tree', tree_url(@tree), class: 'btn btn-primary margined-link'
