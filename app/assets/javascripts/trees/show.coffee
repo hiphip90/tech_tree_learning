@@ -1,9 +1,19 @@
 $ ->
+  populateForm = (data)->
+    form = $('form#new_node').attr('action', data.nodeUrl).attr('method', 'PUT')
+    for attr, value of data
+      input = $('.' + attr).find('input')
+      if input != undefined && input.length > 0
+        input.val(value)
+
   getNodeDetails = (node)->
     nodeUrl = $(node)[0].__data__.node_url
     $.getJSON nodeUrl, (data) ->
-      $('.node-icon-show').find('img').attr('src', data.image_url)
-      $('.node-header').find('h2').text(data.full_name)
+      if window.location.pathname.match(/\/trees\/\d+\/edit/)
+        populateForm(data)
+      else
+        $('.node-icon-show').find('img').attr('src', data.image_url)
+        $('.node-header').find('h2').text(data.full_name)
 
   initializeClickHandlerForNodes = ->
     $('.node svg').click ()->

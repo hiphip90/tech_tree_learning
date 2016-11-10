@@ -38,8 +38,16 @@ class Node < ApplicationRecord
   validate :requirement_present_in_tree
   validate :no_overlapping
 
-  before_validation :populate_name
+  before_save :populate_name
   before_destroy :destroy_requirements
+
+  protected
+
+  def update_requirements(old_req, new_req)
+    requirements.delete_if { |req| req == old_req }
+    requirements << new_req
+    save
+  end
 
   private
 
@@ -50,7 +58,12 @@ class Node < ApplicationRecord
   end
 
   def populate_name
-    self.name = full_name.downcase.gsub(' ', '')
+    old_name = name
+    new_name = full_name.downcase.gsub(' ', '')
+    return if old_name == new_name
+    self.name = new_name
+    dependent_nodes = tree.nodes.where("'#{old_name}' = ANY requirements")
+    dependent_nodes.each { |node| node.update_requirements(old_name, new_name) }
   end
 
   def requirement_present_in_tree

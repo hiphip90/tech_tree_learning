@@ -8,8 +8,16 @@ class NodesController < ApplicationController
 
   def create
     @tree = Tree.find(params[:tree_id])
-    @node = @tree.nodes.create(node_params)
+    @node = @tree.nodes.create!(node_params)
     head :created
+  end
+
+  def update
+    @node = Node.find(params[:id])
+    @node.update!(node_params)
+    respond_to do |format|
+      format.json { render :show, layout: false }
+    end
   end
 
   def destroy

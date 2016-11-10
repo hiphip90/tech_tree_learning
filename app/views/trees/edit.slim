@@ -3,6 +3,7 @@
     .row-fluid.text-center.tree-header
       h1
         = @tree.name
+      = link_to 'Add node', edit_tree_url(@tree)
     .tree data={url: tree_url(@tree)}
       #svg
 - content_for :sidebar do
@@ -10,15 +11,15 @@
     .fieldset
       .control-group
         = f.label :full_name, nil, class: 'control-label'
-        .controls
+        .controls.full_name
           = f.text_field :full_name, class: 'form-control'
       .control-group
         = f.label :depth, nil, class: 'control-label'
-        .controls
+        .controls.depth
           = f.text_field :depth, class: 'form-control'
       .control-group
         = f.label :column_number, nil, class: 'control-label'
-        .controls
+        .controls.column_number
           = f.text_field :column_number, class: 'form-control'
       .control-group
         = f.label :requirements, nil, class: 'control-label'
