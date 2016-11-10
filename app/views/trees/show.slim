@@ -8,8 +8,12 @@
       #svg
 - content_for :sidebar do
   .row-fluid
-    .node-icon-show.span4
-      image src=(@node.icon.url) width=64 height=64
-    .node-header.span8
-      h2
-        = @node.full_name
+    - if @node.present?
+      .node-icon-show.span4
+        image src=(@node.icon.url) width=64 height=64
+      .node-header.span8
+        h2
+          = @node.full_name
+    - else
+      h2.tree-header No content here
+      = link_to 'Want to create some?', edit_tree_url(@tree)
