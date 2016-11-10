@@ -38,14 +38,13 @@ class Node < ApplicationRecord
   validate :requirement_present_in_tree
   validate :no_overlapping
 
-  before_destroy :destroy_requirements
+  before_destroy :destroy_dependencies
 
   private
 
-  def destroy_requirements
-    requirements.each do |node_name|
-      tree.nodes.find_by(name: node_name).destroy
-    end
+  def destroy_dependencies
+    dependent_nodes = tree.nodes.where("'#{name}' = ANY (requirements)")
+    dependent_nodes.destroy_all
   end
 
   def requirement_present_in_tree

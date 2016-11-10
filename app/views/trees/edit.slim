@@ -12,15 +12,15 @@
       .control-group
         = f.label :full_name, nil, class: 'control-label'
         .controls.full_name
-          = f.text_field :full_name, class: 'form-control'
+          = f.text_field :full_name, class: 'form-control full-width-input'
       .control-group
         = f.label :depth, nil, class: 'control-label'
         .controls.depth
-          = f.text_field :depth, class: 'form-control'
+          = f.text_field :depth, class: 'form-control full-width-input'
       .control-group
         = f.label :column_number, nil, class: 'control-label'
         .controls.column_number
-          = f.text_field :column_number, class: 'form-control'
+          = f.text_field :column_number, class: 'form-control full-width-input'
       .control-group
         = f.label :requirements, nil, class: 'control-label'
         .controls
@@ -30,5 +30,7 @@
         .controls
           = f.file_field :icon, class: 'form-control'
       .form-actions
-        = f.button class: 'btn btn-primary', id: 'submitButton', type: 'button'
-        = link_to 'Back to tree', tree_url(@tree), class: 'btn btn-primary margined-link'
+        = f.button class: 'btn btn-primary half-width-button', id: 'submitButton', type: 'button'
+        = link_to 'Back to tree', tree_url(@tree), class: 'btn btn-primary margined-link pull-right half-width-button'
+      .form-actions
+        = link_to 'Delete node', '#', class: 'btn btn-danger full-width-button hidden destroy-link'

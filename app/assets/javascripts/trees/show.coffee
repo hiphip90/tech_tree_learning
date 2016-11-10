@@ -3,10 +3,21 @@ $ ->
     form = $('form.node-form').attr('action', data.node_url)
       .attr('method', 'PUT').removeClass('new_node edit_node')
       .addClass('edit_node').attr('id', 'edit_node')
+    form.find('button').text('Update Node')
+    form.find('.destroy-link').attr('href', data.node_url).removeClass('hidden')
     for attr, value of data
       input = $('.' + attr).find('input')
       if input != undefined && input.length > 0
         input.val(value)
+
+  clearForm = ->
+    form = $('form.node-form')
+    form.attr('action', form.data('new-url')).attr('method', 'POST')
+      .removeClass('new_node edit_node')
+      .addClass('new_node').attr('id', 'new_node')
+    form.find('input[type="text"]').val('')
+    form.find('button').text('Create Node')
+    form.find('.destroy-link').attr('href', '#').addClass('hidden')
 
   getNodeDetails = (node)->
     nodeUrl = $(node)[0].__data__.node_url
@@ -46,10 +57,15 @@ $ ->
 
   $('.new-node-link').click (e)->
     e.preventDefault()
-    form = $('form.node-form')
-    form.attr('action', form.data('new-url')).attr('method', 'POST')
-      .removeClass('new_node edit_node')
-      .addClass('new_node').attr('id', 'new_node')
-    form.find('input[type="text"]').val('')
+    clearForm();
 
+  $('.destroy-link').click (e)->
+    e.preventDefault()
+    url = $(this).attr('href')
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      success: (data)->
+        redrawTree()
+    })
 

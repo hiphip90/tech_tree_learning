@@ -51,3 +51,28 @@
 .node-icon-show {
   margin-top: 10px;
 }
+
+.full-width-input {
+  width: 100%;
+  box-sizing:border-box;
+  height: 30px!important;
+}
+
+.full-width-button {
+  width: 100%;
+  box-sizing:border-box;
+}
+
+.half-width-button {
+  width: 48%;
+  box-sizing:border-box;
+}
+
+.chzn-container {
+  width: 100%;
+  box-sizing:border-box;
+}
+
+.form-actions {
+  padding-right: 10px;
+}
