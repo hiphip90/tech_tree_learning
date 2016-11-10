@@ -1,6 +1,6 @@
 $ ->
   populateForm = (data)->
-    form = $('form#new_node').attr('action', data.node_url)
+    form = $('form.node-form').attr('action', data.node_url)
       .attr('method', 'PUT').removeClass('new_node edit_node')
       .addClass('edit_node').attr('id', 'edit_node')
     for attr, value of data
@@ -43,5 +43,13 @@ $ ->
     drawTree()
 
   $(".chzn-select").chosen({width: '100%'})
+
+  $('.new-node-link').click (e)->
+    e.preventDefault()
+    form = $('form.node-form')
+    form.attr('action', form.data('new-url')).attr('method', 'POST')
+      .removeClass('new_node edit_node')
+      .addClass('new_node').attr('id', 'new_node')
+    form.find('input[type="text"]').val('')
 
 

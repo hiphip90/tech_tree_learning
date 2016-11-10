@@ -3,11 +3,11 @@
     .row-fluid.text-center.tree-header
       h1
         = @tree.name
-      = link_to 'Add node', edit_tree_url(@tree)
+      = link_to 'Add node', edit_tree_url(@tree), class: 'new-node-link'
     .tree data={url: tree_url(@tree)}
       #svg
 - content_for :sidebar do
-  = form_for [@tree, @node], html: { class: 'node-form' } do |f|
+  = form_for [@tree, @node], html: { class: 'node-form', data: { new_url: tree_nodes_path(@tree) } } do |f|
     .fieldset
       .control-group
         = f.label :full_name, nil, class: 'control-label'
