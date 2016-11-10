@@ -1,4 +1,5 @@
 json.nodes @nodes.each do |node|
+    json.node_url tree_node_path(@tree, node)
     json.depth node.depth
     json.image_url node.icon.url
     json.name node.name

@@ -55,12 +55,12 @@ var techTree = (function(api){
     api.initializeNodes = function initializeNodes(nodes, nodesByName){
         nodes.enter().append("g")
             .attr("class", "node")
+            .attr("data-nodeUrl", function(d){
+                return d.node_url
+            })
             .attr("id",function(pNode,c){
                 nodesByName[pNode.name] = d3.select(this);
                 return c;
-            })
-            .on("click", function(pNode){
-                return api.clickHandler(pNode, nodesByName);
             })
             // Transition nodes to their new position.
             .attr("transform", function(d){
@@ -70,6 +70,18 @@ var techTree = (function(api){
         initializeBorder(nodes);
         initializeImages(nodes);
     };
+    api.clickNode = function clickNode(node_name){
+        pNode = api.findNodeByName(node_name)
+        return api.clickHandler(pNode, api.nodesByNameAccessor)
+    }
+    api.findNodeByName = function findNodeByName(node_name){
+        return techTree.nodesData.find(function(nodeData){
+            if (nodeData.name === node_name) {
+                return true;
+            }
+            return false;
+        });
+    }
     api.updateNode = function updateNode(node) {
         node
             .transition()

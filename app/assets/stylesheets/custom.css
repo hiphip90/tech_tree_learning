@@ -39,10 +39,14 @@
   text-align: center;
 }
 
-.tree-header {
+.tree-header, .node-header {
   color: white;
 }
 
 .trees-row {
   margin-top: 40px;
+}
+
+.node-icon-show {
+  margin-top: 10px;
 }

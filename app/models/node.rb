@@ -39,8 +39,15 @@ class Node < ApplicationRecord
   validate :no_overlapping
 
   before_validation :populate_name
+  before_destroy :destroy_requirements
 
   private
+
+  def destroy_requirements
+    requirements.each do |node_name|
+      tree.nodes.find_by(name: node_name).destroy
+    end
+  end
 
   def populate_name
     self.name = full_name.downcase.gsub(' ', '')

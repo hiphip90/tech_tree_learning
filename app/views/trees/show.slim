@@ -1,6 +1,14 @@
-.row-fluid.text-center.tree-header
-  h1
-    = @tree.name
 .row-fluid
-  .tree.span12 data={url: tree_url(@tree)}
-    #svg
+  .tree-container.span9
+    .row-fluid.text-center.tree-header
+      h1
+        = @tree.name
+    .tree.span12 data={url: tree_url(@tree)}
+      #svg
+  .span3.sidebar-right
+    .row-fluid
+      .node-icon-show.span4
+        image src=(@node.icon.url) width=64 height=64
+      .node-header.span8
+        h2
+          = @node.full_name

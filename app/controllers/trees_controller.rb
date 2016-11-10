@@ -6,6 +6,7 @@ class TreesController < ApplicationController
   def show
     @tree = Tree.find(params[:id])
     @nodes = @tree.nodes
+    @node = @nodes.first
     respond_to do |format|
       format.json { render :show, layout: false }
       format.html
