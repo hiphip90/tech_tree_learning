@@ -1,4 +1,15 @@
 $ ->
+  submitNodeForm = ->
+    form = $('form.node-form')
+    url = form.attr('action')
+    $.ajax({
+      url: url,
+      type: form.attr('method'),
+      data: form.serialize(),
+      success: (data)->
+        redrawTree()
+    })
+
   drawTree = ->
     for container in $('.tree')
       $.getJSON $(container).data('url'), (data) ->
@@ -8,7 +19,7 @@ $ ->
         }
         techTree.createTree(data.nodes, settings, data.offsets)
         if window.location.pathname.match(/\/trees\/\d+\/edit/)
-          $('.node').d3Click();
+          techTree.activateAllNodes()
 
   redrawTree = ->
     if $('.tree').length > 0
@@ -16,9 +27,5 @@ $ ->
       drawTree()
 
   $('#submitButton').click( (e)->
-    form = $('#new_node')
-    url = form.attr('action')
-    $.post(url, form.serialize(), (data)->
-      redrawTree()
-    )
+    submitNodeForm();
   )

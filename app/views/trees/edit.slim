@@ -7,7 +7,7 @@
     .tree data={url: tree_url(@tree)}
       #svg
 - content_for :sidebar do
-  = form_for [@tree, @node], class: 'form-horizontal' do |f|
+  = form_for [@tree, @node], html: { class: 'node-form' } do |f|
     .fieldset
       .control-group
         = f.label :full_name, nil, class: 'control-label'

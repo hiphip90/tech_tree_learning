@@ -1,6 +1,8 @@
 $ ->
   populateForm = (data)->
-    form = $('form#new_node').attr('action', data.nodeUrl).attr('method', 'PUT')
+    form = $('form#new_node').attr('action', data.node_url)
+      .attr('method', 'PUT').removeClass('new_node edit_node')
+      .addClass('edit_node').attr('id', 'edit_node')
     for attr, value of data
       input = $('.' + attr).find('input')
       if input != undefined && input.length > 0
@@ -29,7 +31,7 @@ $ ->
         techTree.createTree(data.nodes, settings, data.offsets)
         initializeClickHandlerForNodes()
         if window.location.pathname.match(/\/trees\/\d+\/edit/)
-          $('.node').d3Click();
+          techTree.activateAllNodes()
 
   redrawTree = ->
     if $('.tree').length > 0
