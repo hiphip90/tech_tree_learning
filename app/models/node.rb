@@ -27,6 +27,8 @@
 
 class Node < ApplicationRecord
   belongs_to :tree
+  has_many :learning_materials
+  accepts_nested_attributes_for :learning_materials
 
   validates :full_name, :depth, :column_number, presence: true
   validates :name, uniqueness: { scope: :tree }

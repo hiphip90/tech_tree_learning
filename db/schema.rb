@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108125214) do
+ActiveRecord::Schema.define(version: 20161111112136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "learning_materials", force: :cascade do |t|
+    t.integer  "node_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["node_id"], name: "index_learning_materials_on_node_id", using: :btree
+  end
 
   create_table "nodes", force: :cascade do |t|
     t.string   "name"
@@ -42,5 +51,6 @@ ActiveRecord::Schema.define(version: 20161108125214) do
     t.datetime "icon_updated_at"
   end
 
+  add_foreign_key "learning_materials", "nodes"
   add_foreign_key "nodes", "trees"
 end
