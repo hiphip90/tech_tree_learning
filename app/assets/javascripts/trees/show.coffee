@@ -42,6 +42,11 @@ $ ->
       else
         $('.node-icon-show').find('img').attr('src', data.image_url)
         $('.node-header').find('h2').text(data.full_name)
+        $('.node-learning-materials').html('')
+        for lm in data.learning_materials
+        container = $('<div class="lm-content"></div>').appendTo('.node-learning-materials')
+          container.append('<h4 class="white-font">'+lm.name+'</h4>')
+          container.append('<p class="white-font">'+lm.description+'</p>')
 
   initializeClickHandlerForNodes = ->
     $('.node svg').click ()->

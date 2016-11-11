@@ -20,4 +20,6 @@
 
 class LearningMaterial < ApplicationRecord
   belongs_to :node
+
+  validates :name, presence: true
 end

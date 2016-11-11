@@ -9,3 +9,7 @@ json.available_requirements (@node.tree.nodes - [@node]) do |node|
   json.name node.name
   json.full_name node.full_name
 end
+json.learning_materials @node.learning_materials do |lm|
+  json.name lm.name
+  json.description lm.description
+end

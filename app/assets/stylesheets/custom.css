@@ -40,7 +40,7 @@
   text-align: center;
 }
 
-.tree-header, .node-header {
+.white-font, .node-header {
   color: white;
 }
 
@@ -80,4 +80,15 @@
 .uploader span {
   color: white;
   text-shadow: none!important;
+}
+
+.lm-content {
+  border-top: 1px;
+  border-top-style: solid;
+  border-top-color: white;
+  margin-left: 0px!important;
+}
+
+.node-learning-materials {
+  margin-left: 0px!important;
 }
