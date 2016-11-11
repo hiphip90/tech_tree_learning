@@ -17,5 +17,6 @@ class TreesController < ApplicationController
     @tree = Tree.find(params[:id])
     @nodes = @tree.nodes
     @node = @tree.nodes.new
+    @node.learning_materials.build
   end
 end

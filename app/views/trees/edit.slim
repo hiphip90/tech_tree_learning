@@ -9,6 +9,7 @@
 - content_for :sidebar do
   = form_for [@tree, @node], html: { class: 'node-form', data: { new_url: tree_nodes_path(@tree) } } do |f|
     .fieldset
+      h2.tree-header Node details
       .control-group
         = f.label :full_name, nil, class: 'control-label'
         .controls.full_name
@@ -29,6 +30,16 @@
         = f.label :icon, nil, class: 'control-label'
         .controls
           = f.file_field :icon, class: 'form-control'
+      h2.tree-header Learning materials
+      = f.fields_for :learning_materials, @node.learning_materials do |l|
+        .control-group
+          = l.label :name, nil, class: 'control-label'
+          .controls
+            = l.text_field :name, class: 'form-control full-width-input'
+        .control-group
+          = l.label :description, nil, class: 'control-label'
+          .controls
+            = l.text_area :description, class: 'form-control full-width-input'
       .form-actions
         = f.button class: 'btn btn-primary half-width-button', id: 'submitButton', type: 'button'
         = link_to 'Back to tree', tree_url(@tree), class: 'btn btn-primary margined-link pull-right half-width-button'

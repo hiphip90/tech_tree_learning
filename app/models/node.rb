@@ -27,7 +27,7 @@
 
 class Node < ApplicationRecord
   belongs_to :tree
-  has_many :learning_materials
+  has_many :learning_materials, before_add: :set_nest
   accepts_nested_attributes_for :learning_materials
 
   validates :full_name, :depth, :column_number, presence: true
@@ -43,6 +43,10 @@ class Node < ApplicationRecord
   before_destroy :destroy_dependencies
 
   private
+
+  def set_nest(learning_material)
+    learning_material.node ||= self
+  end
 
   def destroy_dependencies
     dependent_nodes = tree.nodes.where("'#{name}' = ANY (requirements)")

@@ -7,6 +7,9 @@ $ ->
     form.find('input[type="text"]').val('')
     form.find('button').text('Create Node')
     form.find('.destroy-link').attr('href', '#').addClass('hidden')
+    form.find('.chzn-select').chosen('destroy')
+    form.find('.chzn-select').find('option').removeAttr('selected')
+    form.find('.chzn-select').chosen({width: '100%'})
 
   submitNodeForm = ->
     form = $('form.node-form')
