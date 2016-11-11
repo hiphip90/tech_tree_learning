@@ -1,4 +1,14 @@
 $ ->
+  populateRequirements = (available_requirements, selected_requirements)->
+    requirements_selector = $('form.node-form').find('.chzn-select')
+    requirements_selector.chosen('destroy')
+    requirements_selector.find('option').remove()
+    for req in available_requirements
+      requirements_selector.append('<option value="' + req.name + '">' + req.full_name + '</option>')
+    for req in selected_requirements
+      requirements_selector.find('option[value=' + req + ']').attr('selected', 'selected')
+    requirements_selector.chosen({width: '100%'})
+
   populateForm = (data)->
     form = $('form.node-form').attr('action', data.node_url)
       .attr('method', 'PUT').removeClass('new_node edit_node')
@@ -9,6 +19,8 @@ $ ->
       input = $('.' + attr).find('input')
       if input != undefined && input.length > 0
         input.val(value)
+    populateRequirements(data.available_requirements, data.requirements)
+
 
   clearForm = ->
     form = $('form.node-form')
@@ -39,7 +51,6 @@ $ ->
           'settings': { 'imageFolderName': '/assets' },
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
-        console.log data
         techTree.createTree(data.nodes, settings, data.offsets)
         initializeClickHandlerForNodes()
         if window.location.pathname.match(/\/trees\/\d+\/edit/)

@@ -23,7 +23,7 @@
           = f.text_field :column_number, class: 'form-control full-width-input'
       .control-group
         = f.label :requirements, nil, class: 'control-label'
-        .controls
+        .controls.requirements
           = f.select :requirements, requirements_for_select(@tree, @node), {}, class: 'chzn-select', multiple: true, allow_blank: false
       .control-group
         = f.label :icon, nil, class: 'control-label'

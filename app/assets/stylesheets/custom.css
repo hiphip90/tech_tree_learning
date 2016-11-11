@@ -76,3 +76,8 @@
 .form-actions {
   padding-right: 10px;
 }
+
+.uploader span {
+  color: white;
+  text-shadow: none!important;
+}
