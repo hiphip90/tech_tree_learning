@@ -30,6 +30,9 @@ $ ->
     form.find('input[type="text"]').val('')
     form.find('button').text('Create Node')
     form.find('.destroy-link').attr('href', '#').addClass('hidden')
+    form.find('.chzn-select').chosen('destroy')
+    form.find('.chzn-select').find('option').removeAttr('selected')
+    form.find('.chzn-select').chosen({width: '100%'})
 
   getNodeDetails = (node)->
     nodeUrl = $(node)[0].__data__.node_url
@@ -72,11 +75,12 @@ $ ->
 
   $('.destroy-link').click (e)->
     e.preventDefault()
-    url = $(this).attr('href')
-    $.ajax({
-      url: url,
-      type: 'DELETE',
-      success: (data)->
-        redrawTree()
-    })
+    if confirm('This will destroy the node and all dependent nodes. Do you wish to proceed?')
+      url = $(this).attr('href')
+      $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: (data)->
+          redrawTree()
+      })
 
