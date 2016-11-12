@@ -6,6 +6,7 @@ json.nodes @nodes.each do |node|
     json.columnNumber node.column_number
     json.requirements node.requirements
     json.completed node.completed
+    json.selected node.completed
 end
 
 json.offsets do

@@ -95,15 +95,5 @@ var techTree = (function(api){
             .select("rect").style("fill","#ffcf70").style("stroke","#FFBB33");
         node.select("image").style("filter", "");
     };
-    api.activateAllNodes = function activateAllNodes() {
-        for (var i = 0; i < api.nodesData.length; i++) {
-            api.clickHandler(api.nodesData[i], api.nodesByNameAccessor);
-        }
-    }
-    api.activateNodes = function activateNodes(node_names) {
-        for (var i = 0; i < node_names.length; i++) {
-            api.clickNode(node_names[i])
-        }
-    }
     return api;
 }(techTree || {}));

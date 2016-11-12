@@ -80,18 +80,13 @@ $ ->
           'settings': { 'imageFolderName': '/assets' },
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
+        if window.location.pathname.match(/\/trees\/\d+\/edit/)
+          data.nodes = $.map data.nodes, (node)->
+                          node.selected = true
+                          node
         techTree.createTree(data.nodes, settings, data.offsets)
         initializeClickHandlerForNodes()
-        if window.location.pathname.match(/\/trees\/\d+\/edit/)
-          techTree.activateAllNodes()
-        else
-          nodes = $('.node[data-completed="true"]')
-          if nodes.length > 0
-            names = nodes.map(()->
-              return $(this).data('name')
-            ).get();
-            console.log names
-            techTree.activateNodes(names)
+
 
   redrawTree = ->
     if $('.tree').length > 0
