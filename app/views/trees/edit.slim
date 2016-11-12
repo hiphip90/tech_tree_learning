@@ -34,8 +34,12 @@
       .node-learning-materials
         - (@node.learning_materials - [@new_lm]).each do |lm|
           .lm-content
-            h4.white-font.span8
-              = lm.name
+            .row-fluid
+              h4.white-font.span8
+                = lm.name
+              .span4
+                = link_to learning_material_url(lm), method: :delete, class: 'pull-right destroy-lm-links' do
+                  i.icon-remove
             p.white-font.lm-description
               = lm.description
       .node-lm-fields

@@ -12,4 +12,5 @@ end
 json.learning_materials @node.learning_materials do |lm|
   json.name lm.name
   json.description lm.description
+  json.url learning_material_url(lm)
 end

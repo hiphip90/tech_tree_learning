@@ -3,7 +3,9 @@ $ ->
     $('.node-learning-materials').html('')
     for lm in materials
       container = $('<div class="lm-content"></div>').appendTo('.node-learning-materials')
-      container.append('<h4 class="white-font span8">'+lm.name+'</h4>')
+      first_row = $('<div class="row-fluid"></div>').appendTo(container)
+      first_row.append('<h4 class="white-font span8">'+lm.name+'</h4>')
+      first_row.append('<div class="span4"><a class="pull-right destroy-lm-link" href="'+lm.url+'"><i class="icon-remove"></i></a></div>')
       container.append('<p class="white-font lm-description">'+lm.description+'</p>')
     $('.lm-description').linkify();
 
