@@ -14,7 +14,7 @@
 #
 
 class Tree < ApplicationRecord
-  has_many :nodes
+  has_many :nodes, dependent: :destroy
   has_attached_file :icon, styles: { normal: "64x64>" },
                            url: '/:class/:id/icon',
                            default_url: "/assets/missing.png"

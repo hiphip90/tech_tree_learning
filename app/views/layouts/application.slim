@@ -14,13 +14,12 @@ html
     .navbar
       .navbar-inner
         .container-fluid
-          = link_to root_path, class: 'brand'
-            span TechTree
           .nav-no-collapse.header-nav
             ul.nav.pull-right
-              li.dropdown.hidden-phone
-                = link_to root_path, class: 'btn'
-                  i.icon-bell
+              li
+                = link_to root_path, class: 'btn dropdown-toggle'
+                  i.icon-th
+                  span  Trees index
     .container-fluid-full
       .row-fluid
         #sidebar-left.span2

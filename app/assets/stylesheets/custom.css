@@ -45,7 +45,8 @@
 }
 
 .trees-row {
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .node-icon-show {
@@ -106,4 +107,8 @@
 
 .destroy-lm-link {
   margin-top: 5px;
+}
+
+.tree-destroy {
+  margin-bottom: 5px;
 }

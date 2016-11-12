@@ -2,7 +2,10 @@
   .row-fluid.trees-row
     - trees.each do |tree|
       .span2.tree-icon
-        = link_to tree_url(tree) do
-          image src=(tree.icon.url) width=64 height=64
-          h4.white-font
-            = tree.name
+        .tree-destroy
+          = link_to 'Destroy', tree_url(tree), method: :delete, data: { confirm: "Are you sure?" }
+        div
+          = link_to tree_url(tree) do
+            image src=(tree.icon.url) width=64 height=64
+            h4.white-font
+              = tree.name
