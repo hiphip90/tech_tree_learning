@@ -15,6 +15,7 @@
 #  tree_id           :integer
 #  column_number     :integer
 #  full_name         :string
+#  completed         :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -42,14 +43,26 @@ class Node < ApplicationRecord
 
   before_destroy :destroy_dependencies
 
+  def complete
+    update(completed: true)
+  end
+
+  def cancel_completion
+    update(completed: false)
+    dependent_nodes.each(&:cancel_completion)
+  end
+
   private
+
+  def dependent_nodes
+    tree.nodes.where("'#{name}' = ANY (requirements)")
+  end
 
   def set_nest(learning_material)
     learning_material.node ||= self
   end
 
   def destroy_dependencies
-    dependent_nodes = tree.nodes.where("'#{name}' = ANY (requirements)")
     dependent_nodes.destroy_all
   end
 

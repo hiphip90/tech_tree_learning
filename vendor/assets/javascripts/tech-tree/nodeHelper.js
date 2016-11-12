@@ -62,6 +62,12 @@ var techTree = (function(api){
                 nodesByName[pNode.name] = d3.select(this);
                 return c;
             })
+            .attr('data-name', function(d){
+                return d.name
+            })
+            .attr('data-completed', function(d){
+                return d.completed
+            })
             // Transition nodes to their new position.
             .attr("transform", function(d){
                 return "translate(" + d.x + "," + d.y + ")";
@@ -92,6 +98,11 @@ var techTree = (function(api){
     api.activateAllNodes = function activateAllNodes() {
         for (var i = 0; i < api.nodesData.length; i++) {
             api.clickHandler(api.nodesData[i], api.nodesByNameAccessor);
+        }
+    }
+    api.activateNodes = function activateNodes(node_names) {
+        for (var i = 0; i < node_names.length; i++) {
+            api.clickNode(node_names[i])
         }
     }
     return api;

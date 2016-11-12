@@ -61,6 +61,13 @@ $ ->
           container.append('<h4 class="white-font">'+lm.name+'</h4>')
           container.append('<p class="white-font lm-description">'+lm.description+'</p>')
         $('.lm-description').linkify();
+        $('.complete-link, .uncomplete-link').attr('href', data.completion_url)
+        if data.completed
+          $('.complete-link').addClass('hidden')
+          $('.uncomplete-link').removeClass('hidden')
+        else
+          $('.complete-link').removeClass('hidden')
+          $('.uncomplete-link').addClass('hidden')
 
   initializeClickHandlerForNodes = ->
     $('.node svg').click ()->
@@ -77,6 +84,14 @@ $ ->
         initializeClickHandlerForNodes()
         if window.location.pathname.match(/\/trees\/\d+\/edit/)
           techTree.activateAllNodes()
+        else
+          nodes = $('.node[data-completed="true"]')
+          if nodes.length > 0
+            names = nodes.map(()->
+              return $(this).data('name')
+            ).get();
+            console.log names
+            techTree.activateNodes(names)
 
   redrawTree = ->
     if $('.tree').length > 0
@@ -117,3 +132,26 @@ $ ->
 
   $('.lm-description').linkify();
 
+  $('.complete-link').click (e)->
+    e.preventDefault()
+    url = $(this).attr('href')
+    $.ajax({
+      url: url,
+      type: 'POST',
+      success: (data)->
+        redrawTree()
+        $('.complete-link').addClass('hidden')
+        $('.uncomplete-link').removeClass('hidden')
+    })
+
+  $('.uncomplete-link').click (e)->
+    e.preventDefault()
+    url = $(this).attr('href')
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      success: (data)->
+        redrawTree()
+        $('.complete-link').removeClass('hidden')
+        $('.uncomplete-link').addClass('hidden')
+    })

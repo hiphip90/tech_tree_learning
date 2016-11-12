@@ -23,6 +23,13 @@
               = lm.name
             p.white-font.lm-description
               = lm.description
+    .row-fluid
+      - if @node.completed?
+        = link_to 'Cancel completion', tree_node_completion_url(@tree, @node), class: 'btn btn-danger full-width-button uncomplete-link'
+        = link_to 'Complete node', tree_node_completion_url(@tree, @node), class: 'btn btn-danger full-width-button complete-link hidden'
+      - else
+        = link_to 'Cancel completion', tree_node_completion_url(@tree, @node), class: 'btn btn-danger full-width-button uncomplete-link hidden'
+        = link_to 'Complete node', tree_node_completion_url(@tree, @node), class: 'btn btn-danger full-width-button complete-link'
 
   - else
     .row-fluid

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111112136) do
+ActiveRecord::Schema.define(version: 20161112174011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20161111112136) do
 
   create_table "nodes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.text     "requirements",      default: [],              array: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "requirements",      default: [],                 array: true
     t.integer  "depth"
     t.string   "icon_file_name"
     t.string   "icon_content_type"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20161111112136) do
     t.integer  "tree_id"
     t.integer  "column_number"
     t.string   "full_name"
+    t.boolean  "completed",         default: false, null: false
     t.index ["tree_id"], name: "index_nodes_on_tree_id", using: :btree
   end
 
