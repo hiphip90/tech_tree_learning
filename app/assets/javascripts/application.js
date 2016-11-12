@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/janux/js
 //= require_tree ../../../vendor/assets/javascripts/tech-tree
+//= require linkifyjs
+//= require linkify-jquery.min.js
 //= require turbolinks
 //= require saveSvgAsPng.min.js
 //= require custom.coffee

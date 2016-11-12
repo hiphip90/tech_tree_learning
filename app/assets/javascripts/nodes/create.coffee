@@ -5,11 +5,13 @@ $ ->
       .removeClass('new_node edit_node')
       .addClass('new_node').attr('id', 'new_node')
     form.find('input[type="text"]').val('')
+    form.find('textarea').val('')
     form.find('button').text('Create Node')
     form.find('.destroy-link').attr('href', '#').addClass('hidden')
     form.find('.chzn-select').chosen('destroy')
-    form.find('.chzn-select').find('option').removeAttr('selected')
+    form.find('.chzn-select').val([])
     form.find('.chzn-select').chosen({width: '100%'})
+    $('.node-learning-materials').html('')
 
   submitNodeForm = ->
     form = $('form.node-form')
@@ -23,6 +25,10 @@ $ ->
         clearForm()
     })
 
+  initializeClickHandlerForNodes = ->
+    $('.node svg').click ()->
+      getNodeDetails($(this).parent())
+
   drawTree = ->
     for container in $('.tree')
       $.getJSON $(container).data('url'), (data) ->
@@ -31,6 +37,7 @@ $ ->
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
         techTree.createTree(data.nodes, settings, data.offsets)
+        initializeClickHandlerForNodes()
         if window.location.pathname.match(/\/trees\/\d+\/edit/)
           techTree.activateAllNodes()
 

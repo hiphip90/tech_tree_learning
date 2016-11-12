@@ -15,13 +15,13 @@
         h2
           = @node.full_name
     .row-fluid
-      h2.white-font Learning Materials
+      h2.white-font.lm-header Learning Materials
       .node-learning-materials.span12
         - @node.learning_materials.each do |lm|
           .lm-content
             h3.white-font
               = lm.name
-            p.white-font
+            p.white-font.lm-description
               = lm.description
 
   - else

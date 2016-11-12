@@ -4,6 +4,7 @@ class UpdateNode
 
   def initialize(id, params)
     @node = Node.find(id)
+    binding.pry
     @node.assign_attributes(params)
   end
 

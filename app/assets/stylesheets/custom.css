@@ -92,3 +92,14 @@
 .node-learning-materials {
   margin-left: 0px!important;
 }
+
+.lm-header {
+  margin-top: 20px;
+}
+
+.node-lm-fields {
+  padding-top: 10px;
+  border-top: 1px;
+  border-top-style: solid;
+  border-top-color: white;
+}

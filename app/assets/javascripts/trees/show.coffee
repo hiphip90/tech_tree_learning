@@ -1,4 +1,12 @@
 $ ->
+  displayMaterials = (materials)->
+    $('.node-learning-materials').html('')
+    for lm in materials
+      container = $('<div class="lm-content"></div>').appendTo('.node-learning-materials')
+      container.append('<h4 class="white-font span8">'+lm.name+'</h4>')
+      container.append('<p class="white-font lm-description">'+lm.description+'</p>')
+    $('.lm-description').linkify();
+
   populateRequirements = (available_requirements, selected_requirements)->
     requirements_selector = $('form.node-form').find('.chzn-select')
     requirements_selector.chosen('destroy')
@@ -28,17 +36,20 @@ $ ->
       .removeClass('new_node edit_node')
       .addClass('new_node').attr('id', 'new_node')
     form.find('input[type="text"]').val('')
+    form.find('textarea').val('')
     form.find('button').text('Create Node')
     form.find('.destroy-link').attr('href', '#').addClass('hidden')
     form.find('.chzn-select').chosen('destroy')
-    form.find('.chzn-select').find('option').removeAttr('selected')
+    form.find('.chzn-select').val([])
     form.find('.chzn-select').chosen({width: '100%'})
+    $('.node-learning-materials').html('')
 
   getNodeDetails = (node)->
     nodeUrl = $(node)[0].__data__.node_url
     $.getJSON nodeUrl, (data) ->
       if window.location.pathname.match(/\/trees\/\d+\/edit/)
         populateForm(data)
+        displayMaterials(data.learning_materials)
       else
         $('.node-icon-show').find('img').attr('src', data.image_url)
         $('.node-header').find('h2').text(data.full_name)
@@ -87,5 +98,8 @@ $ ->
         type: 'DELETE',
         success: (data)->
           redrawTree()
+          clearForm()
       })
+
+  $('.lm-description').linkify();
 

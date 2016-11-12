@@ -58,3 +58,6 @@ end
 10.times do |i|
   Tree.create(name: "Test tree ##{i}")
 end
+
+node = Node.last
+5.times { |i| node.learning_materials.create(name: "line #{i}", description: "line #{i}") }

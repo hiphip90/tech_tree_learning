@@ -24,22 +24,30 @@
           = f.text_field :column_number, class: 'form-control full-width-input'
       .control-group
         = f.label :requirements, nil, class: 'control-label'
-        .controls.requirements
+        .controls
           = f.select :requirements, requirements_for_select(@tree, @node), {}, class: 'chzn-select', multiple: true, allow_blank: false
       .control-group
         = f.label :icon, nil, class: 'control-label'
         .controls
           = f.file_field :icon, class: 'form-control'
-      h2.white-font Learning materials
-      = f.fields_for :learning_materials, @node.learning_materials do |l|
-        .control-group
-          = l.label :name, nil, class: 'control-label'
-          .controls
-            = l.text_field :name, class: 'form-control full-width-input'
-        .control-group
-          = l.label :description, nil, class: 'control-label'
-          .controls
-            = l.text_area :description, class: 'form-control full-width-input'
+      h2.white-font.lm-header Learning Materials
+      .node-learning-materials
+        - (@node.learning_materials - [@new_lm]).each do |lm|
+          .lm-content
+            h4.white-font.span8
+              = lm.name
+            p.white-font.lm-description
+              = lm.description
+      .node-lm-fields
+        = f.fields_for :learning_materials, [@new_lm] do |l|
+          .control-group
+            = l.label :name, nil, class: 'control-label'
+            .controls
+              = l.text_field :name, class: 'form-control full-width-input'
+          .control-group
+            = l.label :description, nil, class: 'control-label'
+            .controls
+              = l.text_area :description, class: 'form-control full-width-input'
       .form-actions
         = f.button class: 'btn btn-primary half-width-button', id: 'submitButton', type: 'button'
         = link_to 'Back to tree', tree_url(@tree), class: 'btn btn-primary margined-link pull-right half-width-button'
