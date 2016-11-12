@@ -32,6 +32,7 @@ gem "paperclip", "~> 5.0.0"
 gem 'rails_serve_static_assets'
 gem 'rails-assets-linkifyjs', source: 'https://rails-assets.org'
 gem 'rails-assets-jQuery-linkify', source: 'https://rails-assets.org'
+gem 'rails-assets-jquery-form', source: 'https://rails-assets.org'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

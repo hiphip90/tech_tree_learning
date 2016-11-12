@@ -4,6 +4,7 @@ class CreateNode
   def initialize(tree, params)
     @tree = tree
     @node = @tree.nodes.new(params)
+    sanitize
   end
 
   def process
@@ -30,5 +31,13 @@ class CreateNode
 
   def populate_name
     node.name = node.full_name.downcase.gsub(' ', '')
+  end
+
+  def sanitize
+    node.requirements.reject(&:blank?)
+    node.learning_materials.each do |lm|
+      next if lm.valid?
+      lm.destroy
+    end
   end
 end

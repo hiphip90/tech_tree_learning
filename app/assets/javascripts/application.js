@@ -13,6 +13,7 @@
 //= require d3.min.js
 //= require jquery
 //= require jquery_ujs
+//= require jquery-form
 //= require_tree ../../../vendor/assets/javascripts/janux/js
 //= require_tree ../../../vendor/assets/javascripts/tech-tree
 //= require linkifyjs

@@ -1,4 +1,23 @@
 $ ->
+  drawTree = ->
+    for container in $('.tree')
+      $.getJSON $(container).data('url'), (data) ->
+        settings = {
+          'settings': { 'imageFolderName': '/assets' },
+          'dimensions': { 'svgInitialWidth': $(container).width() }
+        }
+        if window.location.pathname.match(/\/trees\/\d+\/edit/)
+          data.nodes = $.map data.nodes, (node)->
+                          node.selected = true
+                          node
+        techTree.createTree(data.nodes, settings, data.offsets)
+        initializeClickHandlerForNodes()
+
+  redrawTree = ->
+    if $('.tree').length > 0
+      techTree.deleteTree()
+      drawTree()
+
   clearForm = ->
     form = $('form.node-form')
     form.attr('action', form.data('new-url')).attr('method', 'POST')
@@ -14,37 +33,13 @@ $ ->
     $('.node-learning-materials').html('')
 
   submitNodeForm = ->
-    form = $('form.node-form')
-    url = form.attr('action')
-    $.ajax({
-      url: url,
-      type: form.attr('method'),
-      data: form.serialize(),
-      success: (data)->
-        redrawTree()
-        clearForm()
-    })
+    $('form.node-form').ajaxSubmit ()->
+      redrawTree()
+      clearForm()
 
   initializeClickHandlerForNodes = ->
     $('.node svg').click ()->
       getNodeDetails($(this).parent())
-
-  drawTree = ->
-    for container in $('.tree')
-      $.getJSON $(container).data('url'), (data) ->
-        settings = {
-          'settings': { 'imageFolderName': '/assets' },
-          'dimensions': { 'svgInitialWidth': $(container).width() }
-        }
-        techTree.createTree(data.nodes, settings, data.offsets)
-        if window.location.pathname.match(/\/trees\/\d+\/edit/)
-          techTree.activateAllNodes()
-        initializeClickHandlerForNodes()
-
-  redrawTree = ->
-    if $('.tree').length > 0
-      techTree.deleteTree()
-      drawTree()
 
   $('#submitButton').click( (e)->
     submitNodeForm();

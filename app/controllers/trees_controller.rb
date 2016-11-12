@@ -3,6 +3,11 @@ class TreesController < ApplicationController
     @trees = Tree.all
   end
 
+  def create
+    Tree.create(tree_params)
+    redirect_to root_path
+  end
+
   def show
     @tree = Tree.find(params[:id])
     @nodes = @tree.nodes
@@ -24,5 +29,11 @@ class TreesController < ApplicationController
     @tree = Tree.find(params[:id])
     @tree.destroy
     redirect_to root_path
+  end
+
+  private
+
+  def tree_params
+    params.require(:tree).permit(:name, :icon)
   end
 end
