@@ -59,7 +59,8 @@ $ ->
         for lm in data.learning_materials
           container = $('<div class="lm-content"></div>').appendTo('.node-learning-materials')
           container.append('<h4 class="white-font">'+lm.name+'</h4>')
-          container.append('<p class="white-font">'+lm.description+'</p>')
+          container.append('<p class="white-font lm-description">'+lm.description+'</p>')
+        $('.lm-description').linkify();
 
   initializeClickHandlerForNodes = ->
     $('.node svg').click ()->
