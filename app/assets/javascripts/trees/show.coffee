@@ -103,5 +103,16 @@ $ ->
           clearForm()
       })
 
+  $(document).on 'click', '.destroy-lm-link', (e)->
+    e.preventDefault()
+    link = $(this)
+    url = link.attr('href')
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      success: (data)->
+        link.closest('.lm-content').remove()
+    })
+
   $('.lm-description').linkify();
 

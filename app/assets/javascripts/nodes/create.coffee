@@ -37,9 +37,9 @@ $ ->
           'dimensions': { 'svgInitialWidth': $(container).width() }
         }
         techTree.createTree(data.nodes, settings, data.offsets)
-        initializeClickHandlerForNodes()
         if window.location.pathname.match(/\/trees\/\d+\/edit/)
           techTree.activateAllNodes()
+        initializeClickHandlerForNodes()
 
   redrawTree = ->
     if $('.tree').length > 0
