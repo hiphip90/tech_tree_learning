@@ -33,6 +33,7 @@ gem 'rails_serve_static_assets'
 gem 'rails-assets-linkifyjs', source: 'https://rails-assets.org'
 gem 'rails-assets-jQuery-linkify', source: 'https://rails-assets.org'
 gem 'rails-assets-jquery-form', source: 'https://rails-assets.org'
+gem 'aws-sdk'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

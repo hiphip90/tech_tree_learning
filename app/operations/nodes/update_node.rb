@@ -47,7 +47,7 @@ class UpdateNode
   end
 
   def create_learning_materials
-    return unless lm_params['name'].present? && lm_params['description'].present?
+    lm_params.present? && lm_params['name'].present? && lm_params['description'].present?
     lm = LearningMaterial.new(lm_params)
     lm.node = node
     node.learning_materials << lm
