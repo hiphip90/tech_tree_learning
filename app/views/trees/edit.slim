@@ -43,7 +43,7 @@
             p.white-font.lm-description
               = lm.description
       .node-lm-fields
-        = f.fields_for :learning_materials, [@new_lm] do |l|
+        = f.fields_for :learning_materials, @new_lm do |l|
           .control-group
             = l.label :name, nil, class: 'control-label'
             .controls

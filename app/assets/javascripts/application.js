@@ -21,4 +21,5 @@
 //= require turbolinks
 //= require saveSvgAsPng.min.js
 //= require custom.coffee
-//= require_tree .
+//= require trees/show.coffee
+//= require nodes/create.coffee

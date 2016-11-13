@@ -32,6 +32,6 @@ class NodesController < ApplicationController
 
   def node_params
     params.require(:node).permit(:full_name, :depth, :column_number, :icon, requirements: [],
-                                 learning_materials_attributes: [:name, :description])
+                                 learning_materials: [:name, :description])
   end
 end

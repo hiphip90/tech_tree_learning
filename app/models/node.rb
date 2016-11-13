@@ -28,8 +28,7 @@
 
 class Node < ApplicationRecord
   belongs_to :tree
-  has_many :learning_materials, before_add: :set_nest, dependent: :destroy
-  accepts_nested_attributes_for :learning_materials, allow_destroy: true
+  has_many :learning_materials, before_add: :set_nest, dependent: :destroy, autosave: true
 
   validates :full_name, :depth, :column_number, presence: true
   validates :name, uniqueness: { scope: :tree }

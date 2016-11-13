@@ -1,5 +1,5 @@
 $ ->
-  displayMaterials = (materials)->
+  window.displayMaterials = (materials)->
     $('.node-learning-materials').html('')
     for lm in materials
       container = $('<div class="lm-content"></div>').appendTo('.node-learning-materials')
@@ -9,34 +9,37 @@ $ ->
       container.append('<p class="white-font lm-description">'+lm.description+'</p>')
     $('.lm-description').linkify();
 
-  populateRequirements = (available_requirements, selected_requirements)->
+  window.populateRequirements = (available_requirements, selected_requirements)->
     requirements_selector = $('form.node-form').find('.chzn-select')
     requirements_selector.chosen('destroy')
     requirements_selector.find('option').remove()
+    console.log available_requirements
     for req in available_requirements
       requirements_selector.append('<option value="' + req.name + '">' + req.full_name + '</option>')
     for req in selected_requirements
       requirements_selector.find('option[value=' + req + ']').attr('selected', 'selected')
     requirements_selector.chosen({width: '100%'})
 
-  populateForm = (data)->
+  window.populateForm = (data)->
     form = $('form.node-form').attr('action', data.node_url)
-      .attr('method', 'PUT').removeClass('new_node edit_node')
+      .removeClass('new_node edit_node')
       .addClass('edit_node').attr('id', 'edit_node')
+    form.prepend('<input name="_method" type="hidden" value="patch" />')
     form.find('button').text('Update Node')
     form.find('.destroy-link').attr('href', data.node_url).removeClass('hidden')
     for attr, value of data
       input = $('.' + attr).find('input')
       if input != undefined && input.length > 0
         input.val(value)
-    populateRequirements(data.available_requirements, data.requirements)
+    window.populateRequirements(data.available_requirements, data.requirements)
 
 
-  clearForm = ->
+  window.clearForm = ->
     form = $('form.node-form')
-    form.attr('action', form.data('new-url')).attr('method', 'POST')
+    form.attr('action', form.data('new-url'))
       .removeClass('new_node edit_node')
       .addClass('new_node').attr('id', 'new_node')
+    form.find('input[name="_method"]').remove()
     form.find('input[type="text"]').val('')
     form.find('textarea').val('')
     form.find('button').text('Create Node')
@@ -46,12 +49,12 @@ $ ->
     form.find('.chzn-select').chosen({width: '100%'})
     $('.node-learning-materials').html('')
 
-  getNodeDetails = (node)->
+  window.getNodeDetails = (node)->
     nodeUrl = $(node)[0].__data__.node_url
     $.getJSON nodeUrl, (data) ->
       if window.location.pathname.match(/\/trees\/\d+\/edit/)
-        populateForm(data)
-        displayMaterials(data.learning_materials)
+        window.populateForm(data)
+        window.displayMaterials(data.learning_materials)
       else
         $('.node-icon-show').find('img').attr('src', data.image_url)
         $('.node-header').find('h2').text(data.full_name)
@@ -69,11 +72,11 @@ $ ->
           $('.complete-link').removeClass('hidden')
           $('.uncomplete-link').addClass('hidden')
 
-  initializeClickHandlerForNodes = ->
+  window.initializeClickHandlerForNodes = () ->
     $('.node svg').click ()->
-      getNodeDetails($(this).parent())
+      window.getNodeDetails($(this).parent())
 
-  drawTree = ->
+  window.drawTree = ->
     for container in $('.tree')
       $.getJSON $(container).data('url'), (data) ->
         settings = {
@@ -85,22 +88,22 @@ $ ->
                           node.selected = true
                           node
         techTree.createTree(data.nodes, settings, data.offsets)
-        initializeClickHandlerForNodes()
+        window.initializeClickHandlerForNodes()
 
 
-  redrawTree = ->
+  window.redrawTree = ->
     if $('.tree').length > 0
       techTree.deleteTree()
-      drawTree()
+      window.drawTree()
 
   if $('.tree').length > 0
-    drawTree()
+    window.drawTree()
 
   $(".chzn-select").chosen({width: '100%'})
 
   $('.new-node-link').click (e)->
     e.preventDefault()
-    clearForm();
+    window.clearForm();
 
   $('.destroy-link').click (e)->
     e.preventDefault()
@@ -110,8 +113,8 @@ $ ->
         url: url,
         type: 'DELETE',
         success: (data)->
-          redrawTree()
-          clearForm()
+          window.redrawTree()
+          window.clearForm()
       })
 
   $(document).on 'click', '.destroy-lm-link', (e)->
@@ -134,7 +137,7 @@ $ ->
       url: url,
       type: 'POST',
       success: (data)->
-        redrawTree()
+        window.redrawTree()
         $('.complete-link').addClass('hidden')
         $('.uncomplete-link').removeClass('hidden')
     })
@@ -146,7 +149,7 @@ $ ->
       url: url,
       type: 'DELETE',
       success: (data)->
-        redrawTree()
+        window.redrawTree()
         $('.complete-link').removeClass('hidden')
         $('.uncomplete-link').addClass('hidden')
     })

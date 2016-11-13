@@ -1,10 +1,10 @@
 class UpdateNode
-  attr_reader :node
+  attr_reader :node, :lm_params
   attr_accessor :old_name
 
   def initialize(id, params)
     @node = Node.find(id)
-    binding.pry
+    @lm_params = params.delete('learning_materials')
     @node.assign_attributes(params)
   end
 
@@ -22,6 +22,7 @@ class UpdateNode
 
   def _execute_before_update_callbacks
     update_name
+    create_learning_materials
   end
 
   def _execute_after_update_callbacks
@@ -43,5 +44,12 @@ class UpdateNode
       dependent_node.requirements << node.name
       dependent_node.save
     end
+  end
+
+  def create_learning_materials
+    return unless lm_params['name'].present? && lm_params['description'].present?
+    lm = LearningMaterial.new(lm_params)
+    lm.node = node
+    node.learning_materials << lm
   end
 end
