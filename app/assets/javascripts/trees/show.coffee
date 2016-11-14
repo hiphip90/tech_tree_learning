@@ -90,6 +90,7 @@ $ ->
         techTree.createTree(data.nodes, settings, data.offsets)
         window.initializeClickHandlerForNodes()
         $('rect').hide()
+        $('path[style="stroke: none;"]').attr('style', 'stroke: gray;')
 
 
   window.redrawTree = ->
