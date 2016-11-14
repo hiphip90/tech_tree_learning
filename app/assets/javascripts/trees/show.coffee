@@ -89,6 +89,7 @@ $ ->
                           node
         techTree.createTree(data.nodes, settings, data.offsets)
         window.initializeClickHandlerForNodes()
+        $('rect').hide()
 
 
   window.redrawTree = ->
